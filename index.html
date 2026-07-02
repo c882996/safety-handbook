@@ -46,9 +46,7 @@ button{-webkit-tap-highlight-color:transparent;}
 .mono{font-family:"JetBrains Mono",monospace;}
 .ln, p, .stitle, .content, .textblock{overflow-wrap:anywhere; word-break:break-word;}
 
-/* ---------- language toggle ---------- */
-body[data-lang="zh"] .th{display:none;}
-body[data-lang="th"] .zh{display:none;}
+/* ---------- bilingual display ---------- */
 .ln{display:block;}
 .ln + .ln{margin-top:2px;}
 .ln.th{color:var(--ink-soft);}
@@ -74,16 +72,6 @@ body[data-lang="th"] .zh{display:none;}
   display:flex; flex-direction:column; line-height:1.3;
 }
 .topbar .brand .th{font-weight:500; font-size:12px; color:#C9CCCF;}
-.langtoggle{display:flex; gap:4px; background:var(--steel-2); padding:4px; border-radius:999px; flex:0 0 auto;}
-.langtoggle button{
-  border:none; background:transparent; color:#C9CCCF;
-  font-family:inherit; font-weight:700; font-size:12px;
-  padding:8px 12px; min-height:34px; border-radius:999px; cursor:pointer;
-  transition:background .15s, color .15s;
-  white-space:nowrap;
-}
-.langtoggle button.active{background:var(--yellow); color:var(--steel);}
-
 /* ---------- hero ---------- */
 .hero{
   background:var(--steel);
@@ -243,7 +231,6 @@ footer .fill{border-bottom:1px solid var(--ink-soft); display:inline-block; min-
   .topbar{padding:9px 12px;}
   .topbar .brand span:first-child{font-size:13.5px;}
   .topbar .brand .th{font-size:11px;}
-  .langtoggle button{padding:7px 9px; font-size:11px;}
 
   .hero{padding:24px 14px 20px;}
   .hero .eyebrow{font-size:11.5px;}
@@ -276,18 +263,13 @@ footer .fill{border-bottom:1px solid var(--ink-soft); display:inline-block; min-
 
 </style>
 </head>
-<body data-lang="both">
+<body>
 
 <div class="hazard-stripe"></div>
 <header class="topbar">
   <div class="brand">
     <span class="zh">脫蠟鑄造廠 安全手冊</span>
     <span class="th">คู่มือความปลอดภัยโรงหล่อ</span>
-  </div>
-  <div class="langtoggle" role="group" aria-label="語言切換 / เลือกภาษา">
-    <button data-lang="both" class="active">雙語／ทั้งสอง</button>
-    <button data-lang="zh">中文</button>
-    <button data-lang="th">ไทย</button>
   </div>
 </header>
 
@@ -493,16 +475,6 @@ footer .fill{border-bottom:1px solid var(--ink-soft); display:inline-block; min-
       '</summary>' +
       '<div class="card-body">' + body + '</div>';
     sc.appendChild(d);
-  });
-
-  // ---------------- language toggle ----------------
-  var buttons = document.querySelectorAll('.langtoggle button');
-  buttons.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      buttons.forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      document.body.setAttribute('data-lang', btn.getAttribute('data-lang'));
-    });
   });
 
 })();
