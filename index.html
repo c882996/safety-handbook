@@ -164,6 +164,7 @@ details.card summary .icon{
   background:var(--paper-2); display:flex; align-items:center; justify-content:center;
   color:var(--steel);
 }
+details.card summary .icon svg{width:18px; height:18px; flex:0 0 auto; display:block;}
 details.card summary .stitle{flex:1; font-size:15.5px; min-width:0;}
 details.card summary .stitle .th{display:block; font-weight:500; font-size:13px; color:var(--ink-soft); margin-top:2px;}
 details.card summary .chev{transition:transform .2s; color:var(--ink-soft); flex:0 0 auto; padding:6px;}
@@ -246,12 +247,28 @@ footer .fill{border-bottom:1px solid var(--ink-soft); display:inline-block; min-
   details.card .card-body.textblock{padding-left:14px;}
   details.card .card-body{padding-right:12px;}
 
-  /* let the header wrap instead of squeezing the title */
+  /* general (non-station) cards: keep it simple, wrap if needed */
   details.card summary{flex-wrap:wrap; row-gap:8px;}
   details.card summary .stitle{flex:1 1 auto;}
   details.card summary .chev{order:3; margin-left:auto;}
+
+  /* station cards: fixed grid so every card lines up the same way,
+     no matter how long the title is */
+  details.station summary{
+    display:grid;
+    grid-template-columns:30px 1fr 22px;
+    grid-template-areas:
+      "num title chev"
+      ".   tag   tag";
+    column-gap:10px; row-gap:8px;
+    align-items:start;
+    flex-wrap:unset;
+  }
+  details.station summary .num{grid-area:num;}
+  details.station summary .stitle{grid-area:title; flex:none;}
+  details.station summary .chev{grid-area:chev; order:0; margin-left:0;}
   details.station summary .risk-tag{
-    order:4; margin-left:42px; flex:0 0 auto;
+    grid-area:tag; justify-self:start; margin-left:0; flex:none;
     font-size:10px; padding:2px 8px;
   }
 
